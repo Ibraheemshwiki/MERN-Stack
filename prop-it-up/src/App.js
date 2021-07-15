@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="persons">
-        <PersonCard firstName = "Ibraheem" lastName = "Shweiki" age = {32} hairColor = "Brown"/>
+      <PersonCard firstName="John" lastName="Smith" age={ 8 } hairColor="Brown" />
       </div>
       <div className="persons">
         <PersonCard firstName = "Layth" lastName = "Irshaid" age = {23} hairColor = "Black"/>
