@@ -7,13 +7,33 @@ const UserForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");  
     const [confirmpassword, setConfirmPassword] = useState("");  
+    const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
     
     const createUser = (e) => {
         e.preventDefault();
         const newUser = { firstname, lastname, email, password, confirmpassword };
         console.log("Welcome", newUser);
+        setHasBeenSubmitted( true );
     };
-    
+    const formMessage = () => {
+        if( hasBeenSubmitted ) {
+            if(firstname.length < 2){
+                return "First name should be at least 2 characters!";
+            }
+            if(lastname.length < 2){
+                return "Last name should be at least 2 characters!";
+            }
+            if(email.length <5){
+                return "Email should be at least 5 characters!";
+            }
+            if(password.length <8){
+                return "Password should be at least 8 characters!";
+            }
+            if(password !== confirmpassword){
+                return "Password should match the Password Confirmation!";
+            }
+        }
+    };
     return(
         <>
         <form onSubmit={ createUser }>
@@ -39,6 +59,7 @@ const UserForm = (props) => {
             </div>
             <input type="submit" value="Create User" />
         </form>
+        <h3>{ formMessage() }</h3><br></br>
         <p>Your Form Data:  </p><br></br>
         <p>Firstname : { firstname }</p>
         <p>Lastname : { lastname }</p>
@@ -47,7 +68,5 @@ const UserForm = (props) => {
         <p>Confirmed Password: { confirmpassword }</p>
         </>
     );
-
-};
-    
+};    
 export default UserForm;
