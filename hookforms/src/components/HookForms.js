@@ -17,7 +17,7 @@ const UserForm = (props) => {
 
     const firstNameHandler =(e)=>{
         setFirstname(e.target.value);
-        if (e.target.value.length==0){
+        if (e.target.value.length===0){
             setFNameerror("")
         }
         else if(e.target.value.length < 2){
@@ -30,7 +30,7 @@ const UserForm = (props) => {
     }
     const lastNameHandler =(e)=>{
         setLastname(e.target.value);
-        if (e.target.value.length==0){
+        if (e.target.value.length===0){
             setLNameerror("")
         }
         else if(e.target.value.length < 2){
@@ -43,7 +43,7 @@ const UserForm = (props) => {
     }
     const emailHandler =(e)=>{
         setEmail(e.target.value);
-        if (e.target.value.length==0){
+        if (e.target.value.length===0){
             setEmailerror("")
         }
         else if(e.target.value.length < 5){
@@ -56,7 +56,7 @@ const UserForm = (props) => {
     }
     const passHandler =(e)=>{
         setPassword(e.target.value);
-        if (e.target.value.length==0){
+        if (e.target.value.length===0){
             setPasserror("")
         }
         else if(e.target.value.length < 8){
@@ -69,7 +69,7 @@ const UserForm = (props) => {
     }
     const passConfHandler =(e)=>{
         setConfirmPassword(e.target.value);
-        if (e.target.value.length==0){
+        if (e.target.value.length===0){
             setConferror("")
         }
         else if(e.target.value !== password){
@@ -86,25 +86,7 @@ const UserForm = (props) => {
         console.log("Welcome", newUser);
         setHasBeenSubmitted( true );
     };
-    const formMessage = () => {
-        if( hasBeenSubmitted ) {
-            if(firstname.length < 2){
-                return "First name should be at least 2 characters!";
-            }
-            if(lastname.length < 2){
-                return "Last name should be at least 2 characters!";
-            }
-            if(email.length <5){
-                return "Email should be at least 5 characters!";
-            }
-            if(password.length <8){
-                return "Password should be at least 8 characters!";
-            }
-            if(password !== confirmpassword){
-                return "Password should match the Password Confirmation!";
-            }
-        }
-    };
+    
     return(
         <>
         <form onSubmit={ createUser }>
@@ -140,8 +122,7 @@ const UserForm = (props) => {
             </div>
             <input type="submit" value="Create User" />
         </form>
-       <br></br>
-        <p>Your Form Data:  </p><br></br>
+        <p>Your Form Data:  </p>
         <p>Firstname : { firstname }</p>
         <p>Lastname : { lastname }</p>
         <p>Email: { email }</p>
