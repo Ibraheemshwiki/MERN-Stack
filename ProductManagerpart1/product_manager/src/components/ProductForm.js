@@ -34,7 +34,7 @@ export default () => {
                 <label>Description</label><br/>
                 <textarea type="text" onChange={(e)=>setDesc(e.target.value)} value={desc}/>
             </p>
-            <input type="submit"/>
+            <input type="submit" value = "Create Product"/>
         </form>
     )
 }

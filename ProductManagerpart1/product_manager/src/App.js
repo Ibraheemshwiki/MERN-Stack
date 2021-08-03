@@ -5,7 +5,6 @@ import Details from './views/Details';
 function App() {
   return (
     <div className="App">
-      <h1>ghfhghd</h1>
       <Router>
         <Main path="/all-products"/>
         <Details path="/all-products/:id" />
