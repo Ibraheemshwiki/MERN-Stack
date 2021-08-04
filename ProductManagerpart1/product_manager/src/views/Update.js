@@ -1,45 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import ProductForm from '../components/ProductForm';
+import { navigate } from '@reach/router';
+
+
 export default props => {
     const { id } = props;
-    const [title, setTitle] = useState(""); 
-    const [price, setPrice] = useState(0);
-    const [desc, setDesc] = useState("");
+    const [product, setProduct] = useState();
+    const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
         axios.get('http://localhost:8000/api/all-products/' + id)
             .then(res => {
-                setTitle(res.data.title);
-                setPrice(res.data.price);
-                setDesc(res.data.desc);
+                setProduct(res.data);
+                setLoaded(true);
             })
     }, [])
-    const updatePerson = e => {
-        e.preventDefault();
-        axios.put('http://localhost:8000/api/all-products/' + id, {
-            title,
-            price,
-            desc
-        })
-            .then(res => console.log(res));
+    const updateProduct = product => {
+        // e.preventDefault();
+        axios.put('http://localhost:8000/api/all-products/' + id, product)
+            .then(res => console.log(res))
+            .then(navigate("/all-products"))
     }
     return (
         <div>
             <h1>Update a Product</h1>
-            <form onSubmit={updatePerson}>
-            <p>
-                <label>Title</label><br/>
-                <input type="text" onChange={(e)=>setTitle(e.target.value)} value={title}/>
-            </p>
-            <p>
-                <label>Price</label><br/>
-                <input type="number" min="1" onChange={(e)=>setPrice(e.target.value)} value={price}/>
-            </p>
-            <p>
-                <label>Description</label><br/>
-                <textarea type="text" onChange={(e)=>setDesc(e.target.value)} value={desc}/>
-            </p>
-            <input type="submit" value = "Update Product"/>
-        </form>
+            {loaded && 
+            <ProductForm onSubmitProp={updateProduct} 
+            initialTitle = {product.title} 
+            initialPrice = {product.price} 
+            initialDesc = {product.desc}/>}
         </div>
     )
 }
